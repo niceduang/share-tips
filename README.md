@@ -8,6 +8,8 @@
 
 ### Todos
 - [ ] 项目从0到1，项目设计重构打包上线发布,玩Nginx
+* [不仅仅是前端er——折腾服务器武装自己](https://segmentfault.com/a/1190000013242438)
+- [ ] 
 - [ ] vue项目部署发布
 - [ ] react全家桶
 - [ ] [Hybrid](https://www.imooc.com/learn/850)
@@ -31,9 +33,54 @@
 5. 前端组件的基本构成和编写模式
 ```
 
-- [ ] [如何用node开发自己的cli工具并发布到NPM ](https://github.com/pkwenda/blog/issues/7)
-- [ ] 
+* 音乐
+    * [腾讯](http://vii.qq.com/cp/a20160128stsy/media-music.shtml)
+    * 音乐倒计时
+    * 音乐进度条
+    * 音乐随机上一首下一首
 
+
+- [ ] [如何用node开发自己的cli工具并发布到NPM ](https://github.com/pkwenda/blog/issues/7)
+- [ ] [laravel](https://laravel.com/)
+```
+// 需要考虑请求发送成功与否
+// 成功：但是状态不是200的情况
+// 成功：状态是200，但是没有数据的情况
+$.ajax({
+        url: 'http://wiki.xyzphp.com/t.php',
+        type: 'POST',
+        data: {
+            time: 2
+        },
+    })
+    .done(function(res) {
+        console.log("success");
+        console.log(res);
+        // 处理返回的数据，因为有的时候返回的数据可能是字符串，而非json格式
+        res = typeof(res) === 'string' ? JSON.parse(res) : res;
+        if (res.status == 200) {
+            // 如果返回的数据data为空
+            if (res.data.length === 0) {
+                console.log('没有数据');
+            } else {
+                // 如果返回的数据data不为空
+                console.log('继续相关操作');
+            }
+        }
+        // 如果返回的数据状态不是200
+        else {
+            alert('error');
+        }
+    })
+    .fail(function() {
+        console.log("error");
+    })
+    .always(function() {
+        console.log("complete");
+    });
+```
+
+- [ ] 
 
 
 
@@ -60,3 +107,16 @@ let b=[...str].reverse().join("");//drow olleh
 - 另外会问一些状态码、jsonp、同于跨域、动画性能、前端优化方面的问题
 - 怎么用node去解决实际工作中的问题，比如联调转发、mock数据、接口校验等等
 - 
+
+
+
+
+
+
+
+
+### 便捷资源
+* [移动端抓包](http://www.telerik.com/fiddler)
+* [找背景图](https://alpha.wallhaven.cc/)
+* [搜狐智能社](http://my.tv.sohu.com/user/299736457#t0)
+* [找设计](https://dribbble.com/)
