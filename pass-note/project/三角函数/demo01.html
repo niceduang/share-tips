@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		.box{
+			position: fixed;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			/*padding: 30px 0;*/
+
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: center;
+		}
+		.box div{
+			width: 100px;
+			height: 100px;
+			border: 1px solid #000;
+			box-sizing: border-box;
+			cursor: pointer;
+			text-align: center;
+			line-height: 100px;
+			border-radius: 50%;
+
+			/*1-1.8*/
+			/*transform: scale(1.0);*/
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<div>5</div>
+	</div>
+	<script type="text/javascript">
+		var box = document.querySelector('.box');
+		var targets=document.querySelectorAll('.box div');
+		var iW = targets[0].offsetWidth;
+		var iH = targets[0].offsetHeight;
+		var winW = document.documentElement.clientWidth;
+		var winH = document.documentElement.clientHeight;
+		var iPer = 0.8;
+		box.addEventListener("mousemove",checkPointer);
+		box.addEventListener("mouseout",resetPointer);
+		var targetPos = [];
+		setTargetPos(targets);
+		function setTargetPos(eles){
+			for (var i = 0; i < eles.length; i++) {
+				var _ele = eles[i];
+				var _x = _ele.offsetLeft + iW/2;
+				var _y = _ele.offsetTop + iH/2;
+				targetPos.push({ele:_ele,x:_x,y:winH-_y});
+			}
+		}
+		function checkPointer(e){
+			var x= e.clientX;
+			var y= e.clientY;
+			for (var i = 0; i < targetPos.length; i++) {
+				var _l = Math.sqrt(Math.pow(Math.abs(x-targetPos[i].x),2) + Math.pow(Math.abs(y-targetPos[i].y),2));
+				var scale = (1-_l/500).toFixed(2);
+				if (scale<0.4) {
+					scale = 0.4;
+				}
+				targetPos[i].ele.style.transform = 'scale('+scale+')';
+			}
+		}
+		/*function checkPointer(e){
+			var x= e.clientX;
+			var y= e.clientY;
+			var allSpace = 0;
+			for (var i = 0; i < targetPos.length; i++) {
+				var _l = Math.sqrt(Math.pow(Math.abs(x-targetPos[i].x),2) + Math.pow(Math.abs(y-targetPos[i].y),2));
+				allSpace += _l;
+			}
+			for (var i = 0; i < targetPos.length; i++) {
+				var _l = Math.sqrt(Math.pow(Math.abs(x-targetPos[i].x),2) + Math.pow(Math.abs(y-targetPos[i].y),2));
+				targetPos[i].ele.style.transform = 'scale('+(allSpace-_l)/allSpace*1.26+')';
+			}
+		}*/
+		function resetPointer(){
+			for (var i = 0; i < targetPos.length; i++) {
+				targetPos[i].ele.style.transform = 'scale(1)';
+			}
+		}
+	</script>
+</body>
+</html>

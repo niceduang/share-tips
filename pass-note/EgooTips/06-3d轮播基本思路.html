@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3d-轮播思路</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/meyer-reset/2.0/reset.min.css">
+	<style type="text/css">
+		.slider-3d{position: relative;width: 970px;height: 320px;margin: 0 auto;border: 1px solid #000;}
+		.slider-3d ul{position: relative;width: 100%;height: 100%;}
+		.slider-3d li{position: absolute;width: 770px;height: 320px;}
+		.slider-3d li img{display: block;width: 100%;height: 100%;margin: 0 auto;}
+		.btn-prev,.btn-next{position: absolute;z-index: 100;top: 50%;margin-top: -30px;width: 30px;height: 60px;border: 1px solid #000;text-align: center;line-height: 60px;cursor: pointer;}
+		.btn-prev{left: 0;}
+		.btn-next{right: 0;}
+	</style>
+</head>
+<body>
+	<div class="slider-3d">
+		<ul>
+			<li><img src="http://game.gtimg.cn/images/tlbb/web1703/feat1.jpg" alt=""></li>
+			<li><img src="http://game.gtimg.cn/images/tlbb/web1703/feat2.jpg" alt=""></li>
+			<li><img src="http://game.gtimg.cn/images/tlbb/web1703/feat3.jpg" alt=""></li>
+			<li><img src="http://game.gtimg.cn/images/tlbb/web1703/feat4.jpg" alt=""></li>
+			<li><img src="http://game.gtimg.cn/images/tlbb/web1703/feat5.jpg" alt=""></li>
+		</ul>
+		<span class="btn-prev">&lt;</span>
+		<span class="btn-next">&gt;</span>
+	</div>
+	<script src="http://ossweb-img.qq.com/images/js/jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+		var posArr = [
+					{
+						"width": 300,
+						"height": 124,
+						"left": 0,
+						"top": 98,
+						"zIndex": 1,
+						"opacity": 0.6
+					},
+					{
+						"width": 535,
+						"height": 222,
+						"left": 50,
+						"top": 49,
+						"zIndex": 2,
+						"opacity": 0.8
+					},
+					{
+						"width": 770,
+						"height": 320,
+						"left": 100,
+						"top": 0,
+						"zIndex": 3,
+						"opacity": 1
+					},
+					{
+						"width": 535,
+						"height": 222,
+						"left": 385,
+						"top": 49,
+						"zIndex": 2,
+						"opacity": 0.8
+					},
+					{
+						"width": 300,
+						"height": 124,
+						"left": 670,
+						"top": 98,
+						"zIndex": 1,
+						"opacity": 0.6
+					}
+				];
+		initPos();
+		function initPos(){
+			var $items = $('.slider-3d li');
+			$items.each(function(index, el) {
+				var i = index;
+				// 注意此处animate里不要是zIndex，否则动画效果怪异
+				// $(this).css('z-index', posArr[i].zIndex).stop(true).animate({
+				// 为了防止串动，css也先控制好位置，init的时候看不出来
+				$(this).addClass('items'+i).css('z-index', posArr[i].zIndex).stop(true).animate({
+					"width":posArr[i].width,
+					"height":posArr[i].height,
+					"left":posArr[i].left,
+					"top":posArr[i].top,
+					"opacity":posArr[i].opacity
+				});
+			});
+		}
+	</script>
+</body>
+</html>

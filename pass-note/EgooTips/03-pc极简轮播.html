@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pc-极简轮播</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/meyer-reset/2.0/reset.min.css">
+    <style type="text/css">
+        /*c5-轮播*/
+        .pic-item{position: relative;width: 888px;height: 284px;border: 10px solid #e22d00;overflow: hidden;margin: 0 auto;}
+        .rollbox{position: relative;width: 888px;height: 284px;overflow: hidden;}
+        .pic-item ul{position: absolute;left: 0;top: 0;/*width: 2760px;*/}
+        .pic-item li{float: left;width: 888px;height: 284px;}
+        .pic-item li a{display: block;width: 100%;height: 100%;}
+        .btn-prev,.btn-next{position: absolute;z-index: 10;top: 50%;margin-top: -15px;width: 30px;height: 30px;line-height: 30px;text-align: center;border: 1px solid #f00;font-size: 20px;background-color: #fff;}
+        .btn-prev{left: 0;}
+        .btn-next{right: 0;}
+        .do{position: absolute;left: 0;bottom: 15px;width: 100%;font-size: 0;text-align: center;}
+        .do span{display: inline-block;*zoom: 1;*display: inline;width: 18px;height: 18px;background-color: #cccccc;margin: 0 5px;border-radius: 50%;cursor: pointer;-webkit-transition: all linear 0.4s;transition: all linear 0.4s;}
+        .do .cur{background-color: #ff0000;}
+    </style>
+</head>
+<body>
+<div id="pic-item-1" class="pic-item">
+    <div class="rollbox">
+        <ul class="clearfix">
+            <li><a href="javascript:;" target="_blank"><img src="http://game.gtimg.cn/images/mir/cp/a20170802year/c6-slide1.jpg" alt="游戏截图" /></a></li>
+            <li><a href="javascript:;" target="_blank"><img src="http://game.gtimg.cn/images/mir/cp/a20170802year/c6-slide2.jpg" alt="游戏截图" /></a></li>
+            <li><a href="javascript:;" target="_blank"><img src="http://game.gtimg.cn/images/mir/cp/a20170802year/c6-slide3.jpg" alt="游戏截图" /></a></li>
+        </ul>
+    </div>
+    <a href="javascript:;" class="btn-prev">&lt;</a>
+    <a href="javascript:;" class="btn-next">&gt;</a>
+    <div class="do"></div>
+</div>
+
+<div id="pic-item-2" class="pic-item">
+    <div class="rollbox">
+        <ul class="clearfix">
+            <li><a href="javascript:;" target="_blank"><img src="http://game.gtimg.cn/images/mir/cp/a20170802year/c6-slide1.jpg" alt="游戏截图" /></a></li>
+            <li><a href="javascript:;" target="_blank"><img src="http://game.gtimg.cn/images/mir/cp/a20170802year/c6-slide2.jpg" alt="游戏截图" /></a></li>
+            <li><a href="javascript:;" target="_blank"><img src="http://game.gtimg.cn/images/mir/cp/a20170802year/c6-slide3.jpg" alt="游戏截图" /></a></li>
+        </ul>
+    </div>
+    <a href="javascript:;" class="btn-prev">&lt;</a>
+    <a href="javascript:;" class="btn-next">&gt;</a>
+    <div class="do"></div>
+</div>
+
+<script src="http://ossweb-img.qq.com/images/js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+/**
+ * 依赖jq
+ * 面向过程===》面向对象
+ */
+
+
+// 轮播-过程
+// imgRun();
+function imgRun(){
+    var iNum = 0;
+    var timer = null;
+    var $parents = $('.pic-item'),
+        $ul = $parents.find('ul'),
+        $li = $ul.find('li'),
+        $span = $parents.find('.do span'),
+        $prev = $parents.find('.btn-prev'),
+        $next = $parents.find('.btn-next');
+    var iSteps = $li.eq(0).width();
+    var len = $li.length;
+    // 初始化ul
+    $ul.css('width',len*iSteps);
+    $next.click(function(event) {
+        next();
+    });
+    $prev.click(function(event) {
+        prev();
+    });
+    $span.click(function(){
+        iNum = $(this).index();
+        run(iNum);
+    });
+    timer = setInterval(function(){
+        next();
+    }, 6000);
+    $parents.on('mouseover',function(){
+        clearInterval(timer);
+    });
+    $parents.on('mouseout',function(){
+        timer = setInterval(function(){
+            next();
+        }, 6000);
+    });
+    function next(){
+        iNum++;
+        run(iNum);
+    }
+    function prev(){
+        iNum--;
+        run(iNum);
+    }
+    function run(m){
+        var m = m%len;
+        m = m<0 ? (m+len):m;
+        $ul.animate({'left':-m*iSteps},400);
+        $span.eq(m).addClass('cur').siblings('span').removeClass('cur');
+    }
+}
+
+// 轮播-oop
+function imgSlider(ops){
+    this.cont = $(ops.cont);
+    this.page = this.cont.find(ops.page);
+    this.ul = this.cont.find('ul');
+    this.li = this.ul.find('li');
+    this.prevBtn = this.cont.find('.btn-prev');
+    this.nextBtn = this.cont.find('.btn-next');
+    this.iWidth = this.li.eq(0).width();
+    this.len = this.li.length;
+    this.iNum = 0;
+    this.timeInterval = ops.timeInterval;
+    this.timer = null;
+    this.cur = ops.cur;
+    this.init();
+}
+imgSlider.prototype = {
+    init: function(){
+        // 初始化ul
+        var _this = this;
+        this.ul.css('width',this.len*this.iWidth);
+        this.createPage();
+        this.pageSpan = this.page.find('span');
+        this.run(this.iNum);
+        this.nextBtn.click(function() {
+            _this.next();
+        });
+        this.prevBtn.click(function() {
+            _this.prev();
+        });
+        this.pageSpan.click(function(){
+            _this.iNum = $(this).index();
+            _this.run(_this.iNum);
+        });
+        this.timer = setInterval(function(){
+            _this.next();
+        }, _this.timeInterval);
+        this.cont.on('mouseover',function(){
+            clearInterval(_this.timer);
+        });
+        this.cont.on('mouseout',function(){
+            _this.timer = setInterval(function(){
+                _this.next();
+            }, _this.timeInterval);
+        });
+    },
+    createPage: function(){
+        var _span = '';
+        for (var i = 0; i < this.len; i++) {
+            _span += '<span></span>';
+        }
+        this.page.html(_span);
+    },
+    prev: function(){
+        this.iNum--;
+        this.run(this.iNum);
+    },
+    next: function(){
+        this.iNum++;
+        this.run(this.iNum);
+    },
+    run: function(m){
+        var m = m%this.len;
+        m = m<0 ? (m+this.len):m;
+        this.ul.animate({'left':-m*this.iWidth},400);
+        this.pageSpan.eq(m).addClass(this.cur).siblings('span').removeClass(this.cur);
+    },
+}
+var imgSlider1 = new imgSlider({
+    "cont":"#pic-item-1",
+    "page":".do",
+    "cur":"cur",
+    "timeInterval":5000
+});
+var imgSlider2 = new imgSlider({
+    "cont":"#pic-item-2",
+    "page":".do",
+    "cur":"cur",
+    "timeInterval":5000
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		window.onload = function(){
+			function run(){
+				this.name = "duang";
+				this.jump = function(){
+					console.log("jump");
+				};
+				this.down = function(){
+					console.log(this);
+					var _this = this;
+					document.onclick = function(){
+						console.log(_this);
+						_this.name = "niceduang";
+						console.log(_this.name);
+					}
+				}
+			}
+			var duang = new run();
+			// console.log(duang.name);
+			// 1、当存在事件的时候会改变this指向
+			duang.down();
+			// 2、当存在定时器的时候会改变this指向
+		}
+	</script>
+</body>
+</html>

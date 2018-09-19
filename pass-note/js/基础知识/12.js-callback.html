@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		!(function(){
+			// 非回调
+			var num = 0;
+			function getData(){
+				setTimeout(function(){
+					num++;
+				},1000);
+			}
+			getData();
+			console.log(num);
+		}());
+		!(function(){
+			// 回调
+			var num = 0;
+			function getData(callback){
+				setTimeout(function(){
+					num++;
+					callback && callback();
+				},1000);
+			}
+			getData(logNum);
+			function logNum(){
+				console.log(num);
+			}
+			// 现在， logNum 函数可以作为一个参数传入，该参数将成为 getData 函数内部的回调变量
+		}());
+		!(function(){}());
+		!(function(){}());
+	</script>
+</body>
+</html>

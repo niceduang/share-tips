@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="按钮">
+	<ul class="ul1"></ul>
+	<script type="text/javascript">
+		// 后端返回的数据
+		var returnData = '[{"title":"001","time":"201701"},{"title":"002","time":"201702"},{"title":"003","time":"201703"}]';
+	</script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oBtn = document.querySelector('input');
+			var oUl = document.querySelector('.ul1');
+			oBtn.onclick = function(){
+				// 操作数据
+				var data = JSON.parse(returnData);
+				// 使用数据
+				var html = '';
+				for (var i = 0; i < data.length; i++) {
+					html += '<li><a href="javascript:;">'+data[i].title+'</a><span>'+data[i].time+'</span></li>';
+				}
+				oUl.innerHTML = html;
+			}
+		}
+	</script>
+</body>
+</html>

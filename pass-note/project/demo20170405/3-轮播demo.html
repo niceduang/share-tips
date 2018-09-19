@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<style type="text/css">
+		body{background-color: #000;}
+		.box{width: 18.75rem;margin: 0 auto;overflow: hidden;border: 1px solid #f00;}
+		.box ul{
+			position: relative;width: 100%;height: 800px;
+			transform-style: preserve-3d;
+			perspective: 700px;
+		}
+		.box li{
+			position: absolute;z-index: 0;top: 0;opacity: 0;width: 550px;height: 800px;box-sizing: border-box;background-color: #fff;
+			transition: all ease 0.4s;
+			transform-origin: center center;
+			transform: translateZ(-100px);
+		}
+		.box li.prev{left: -55px;z-index: 1;opacity: 0.5;}
+		.box li.cur{left: 100px;z-index: 2;opacity: 1;transform: translateZ(0px);}
+		.box li.next{left: 255px;z-index: 1;opacity: 0.5;}
+	</style>
+	<!-- 动态兼容多设备显示脚本 -->
+	<script type="text/javascript">
+	!function(){var c=768;document.write('<style id="o2HtmlFontSize"></style>');var d=function(){var e,f;if(document&&document.documentElement){e=document.documentElement.clientWidth,f=document.documentElement.clientHeight}if(!e||!f){if(window.localStorage["o2-cw"]&&window.localStorage["o2-ch"]){e=parseInt(window.localStorage["o2-cw"]),f=parseInt(window.localStorage["o2-ch"])}else{a();return}}var h=c&&c<e?c/375:e/375,g=f/603;window.localStorage["o2-cw"]=e,window.localStorage["o2-ch"]=f;window.zoom=window.o2Zoom=h;document.getElementById("o2HtmlFontSize").innerHTML="html{font-size:"+(h*20)+"px;}.o2-zoom,.zoom{zoom:"+(h/2)+";}.o2-scale{-webkit-transform: scale("+h/2+"); transform: scale("+h/2+");}"},b,a=function(){if(b){return}b=setInterval(function(){document&&document.documentElement&&document.documentElement.clientWidth&&document.documentElement.clientHeight&&(d(),clearInterval(b),b=undefined)},100)};d();window.addEventListener("resize",d)}();
+	</script>
+	<script>function __uri(url){return url;}</script>
+</head>
+<body>
+	<div class="box">
+		<ul>
+			<li>001</li>
+			<li>002</li>
+			<li>003</li>
+			<li>004</li>
+			<li>005</li>
+			<li>006</li>
+			<li>007</li>
+			<li>008</li>
+			<li>009</li>
+			<li>010</li>
+		</ul>
+	</div>
+	<script src="http://wq.360buyimg.com/fd/promote/base/zepto.min.js"></script>
+	<script src="js/touch.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var $box = $('.box');
+			var len = $('.box li').length;
+			var iNum = len/2;
+			$box[0].touch({
+				tap: function(){
+					console.log('tap');
+				},
+				swipeLeft: function(){
+					console.log('swipeLeft');
+					if (iNum>=len-1) {
+						return;
+					} else {
+						iNum++;
+						changePos(iNum);
+						console.log(iNum);//
+					}
+				},
+				swipeRight: function(){
+					console.log('swipeRight');
+					if (iNum<=0) {
+						return;
+					} else {
+						iNum--;
+						changePos(iNum);
+						console.log(iNum);
+					}
+				}
+			});
+			changePos(iNum);
+			function changePos(m){
+				$('.prev').removeClass('prev');
+				$('.cur').removeClass('cur');
+				$('.next').removeClass('next');
+				$('.box li').eq(m).addClass('cur');
+				$('.box li').eq(m).prev('li').addClass('prev');
+				$('.box li').eq(m).next('li').addClass('next');
+			}
+		});
+	</script>
+</body>
+</html>

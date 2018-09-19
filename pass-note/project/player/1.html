@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="box">
+		<div class="bar"></div>
+	</div>
+	<script src="http://ossweb-img.qq.com/images/js/jquery/jquery-1.11.3.min.js"></script>
+	<script src="player.js"></script>
+	<script type="text/javascript">
+		var audio = null;
+		var MPlayer = QQMusicPlayer({
+		    play : function(e){
+		    	// console.log(e);
+		        console.log('play song success');
+		        audio = e.target;
+		    },
+		    pause : function(e){
+		        console.log('pause');
+		    },
+		    ended : function(e){
+		        console.log('ended');
+		    },
+		    timeupdate : function(e){
+		        // e.target.currentTime
+		        // console.log('playing currentTime : ' + e.target.currentTime);
+		        // console.log('playing duration : ' + e.target.duration);
+		    }
+		});
+		MPlayer.play("000IDtgp2vMWgD");
+		// MPlayer.toggle();
+		// MPlayer.pause();
+		// 重新设置currentTime 就会立即播放到当时
+		// audio.currentTime = 100;
+	</script>
+</body>
+</html>

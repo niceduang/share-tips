@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#box{
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			background-color: #f90;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script type="text/javascript">
+		var oBox = document.querySelector('#box');
+		var l = oBox.offsetLeft;
+		var frame = 0;
+		function run(){
+			frame++;
+			// 每隔6帧走一次
+			if (frame%6==0) {
+				l++;
+				// console.log(l);
+				if (l>=1000) {
+					return;
+				}
+				oBox.style.left = l + 'px';
+			}
+			if (frame>=1000) {
+				frame = 0;
+			}
+			window.requestAnimationFrame(run);
+		}
+		run();
+	</script>
+</body>
+</html>

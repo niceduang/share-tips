@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>game</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		.game-box{text-align: center;position: relative;width: 800px;height: 500px;margin: 0 auto;}
+		.game-in{position: relative;width: 800px;height: 500px;margin: 0 auto;border: 1px solid #000;}
+		.game-in .items{position: absolute;width: 100px;height: 100px;background-color: #f90;line-height: 100px;}
+		.game-in .items span{display: none;position: absolute;left: 50%;top: 50%;margin-left: -15px;margin-top: -15px;width: 30px;height: 30px;line-height: 30px;background-color: #000;color: #fff;border-radius: 50%;}
+		.game-in .items.on span{display: block;}
+		.sz{position: absolute;left: 50%;top: 50%;margin-left: -50px;margin-top: -50px;width: 100px;height: 100px;background-color: #000;color: #fff;line-height: 100px;}
+		.btn-start{display: block;width: 100px;height: 30px;line-height: 30px;margin: 20px auto;text-align: center;border: 1px solid #000;}
+	</style>
+</head>
+<body>
+	<div class="game-box">
+		<div class="game-in">
+			<div class="items">prize1<span></span></div>
+			<div class="items">prize2<span></span></div>
+			<div class="items">prize3<span></span></div>
+			<div class="items">prize4<span></span></div>
+			<div class="items">prize5<span></span></div>
+			<div class="items">prize6<span></span></div>
+			<div class="items">prize7<span></span></div>
+			<div class="items">prize8<span></span></div>
+			<div class="items">prize9<span></span></div>
+			<div class="items">prize10<span></span></div>
+			<div class="items">prize11<span></span></div>
+			<div class="items">prize12<span></span></div>
+			<div class="items">prize13<span></span></div>
+			<div class="items">prize14<span></span></div>
+			<div class="items">prize15<span></span></div>
+			<div class="items">prize16<span></span></div>
+			<div class="items">prize17<span></span></div>
+			<div class="items">prize18<span></span></div>
+			<div class="items">prize19<span></span></div>
+			<div class="items">prize20<span></span></div>
+			<div class="items">prize21<span></span></div>
+			<div class="items">prize22<span></span></div>
+		</div>
+		<div class="sz">我是骰子</div>
+	</div>
+	<a href="javascropt:;" class="btn-start">start</a>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aItems = document.querySelectorAll('.items');
+			var oSz = document.querySelector('.sz');
+			var oBtn = document.querySelector('.btn-start');
+			var len = aItems.length;
+			var szClassNameArr = ["className1","className2","className3","className4","className5","className6"];
+			var prizeArr = ["prize1","prize2","prize3","prize4","prize5","prize6","prize7","prize8","prize9","prize10","prize11","prize12","prize13","prize14","prize15","prize16","prize17","prize18","prize19","prize20","prize21","prize22"];
+			var arrLen = szClassNameArr.length;
+			// 总步数
+			var totalSteps = 0;
+			var lastSteps = totalSteps;
+			var iSRuning = false;
+			// 初始items位置
+			initItemsPos();
+			function initItemsPos(){
+				for (var i = 0; i < len; i++) {
+					aItems[i].index = i;
+					aItems[i].style = "left:"+(i*100)+"px;top:"+(0*100)+"px;";
+					if (i>=8) {
+						// 8------------700,100
+						// 9------------700,200
+						// 10------------700,300
+						// 11------------700,400
+						aItems[i].style = "left:"+(7*100)+"px;top:"+((i-7)%8*100)+"px;";
+					}
+					if (i>=12) {
+						// 12-------------600,400
+						// 13-------------500,400
+						// 14-------------400,400
+						// 15-------------300,400
+						aItems[i].style = "left:"+((18-i)*100)+"px;top:"+(4*100)+"px;";
+					}
+					if (i>=19) {
+						// 19--------------0,400
+						// 20--------------0,300
+						// 21--------------0,200
+						// 22--------------0,100
+						aItems[i].style = "left:"+(0*100)+"px;top:"+((22-i)*100)+"px;";
+					}
+				}
+			}
+			// 按钮添加点击事件
+			oBtn.addEventListener("click",function(){
+				var steps = getRandomNum(1,6);
+				lastSteps = totalSteps;
+				totalSteps += steps;
+				console.log(steps);
+				runShow(steps,function(){
+					runSteps(lastSteps,totalSteps,function(){
+						console.log(document.querySelector('.on').innerHTML);
+						console.log("index="+document.querySelector('.on').index);
+						console.log(prizeArr[document.querySelector('.on').index]);
+						console.log(prizeArr[totalSteps%len]);
+					});
+				});
+			},false);
+			// 获取骰子随机数1-6
+			function getRandomNum(min,max){
+				return Math.round( Math.random() * (max-min) ) + min;
+			}
+			// 前进
+			function runSteps(startNum,endNum,callBack){
+				var startNum = startNum;
+				var endNum = endNum;
+				var timer = null;
+				timer = setInterval(function(){
+					if (startNum>=endNum) {
+						clearInterval(timer);
+						timer = null;
+						callBack();
+					}else{
+						startNum++;
+						addClassName(startNum,"on");
+					}
+				},300);
+			}
+			addClassName(lastSteps,"on");
+			// 增加唯一 on
+			function addClassName(m,className){
+				for (var i = 0; i < len; i++) {
+					aItems[i].classList.remove(className);
+				}
+				aItems[m%len].classList.add(className);
+			}
+			// 骰子动起来
+			function runShow(m,callBack){
+				var timer = null;
+				var iNum = 0;
+				iSRuning = true;
+				timer = setInterval(function(){
+					iNum++;
+					if (iNum>=arrLen*3) {
+						clearInterval(timer);
+						timer = null;
+						iSRuning = false;
+						callBack();
+						oSz.setAttribute("class","sz "+szClassNameArr[m-1]);
+						oSz.innerHTML = "我是骰子"+(m-1+1);
+					}else{
+						oSz.setAttribute("class","sz "+szClassNameArr[iNum%arrLen]);
+						oSz.innerHTML = "我是骰子"+(iNum%arrLen+1);
+					}
+				},30);
+			}
+		}
+	</script>
+</body>
+</html>

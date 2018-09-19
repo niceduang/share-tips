@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<a href="javascript:;" data-control="prev" class="btn">prev</a>
+	<a href="javascript:;" data-control="next" class="btn">next</a>
+	<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$('.btn').on('click',function(){
+			if ($(this).data('control')=='prev') {
+				alert('prev');
+			} else if ($(this).data('control')=='next') {
+				alert('next');
+			}
+		});
+	</script>
+</body>
+</html>

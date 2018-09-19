@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function createTag(data){
+			function Tag(data){
+				this.data = data || [];
+			}
+			Tag.prototype.setResult = function(m){
+				var info = this.data[m].infoArr;
+				var _info_arr = info[Math.floor(Math.random()*info.length)].split('_');
+				var _str = '';
+				for (var i = 0; i < _info_arr.length; i++) {
+					_str += '<p>';
+					_str += _info_arr[i]
+					_str += '</p>';
+				}
+				console.log("tag-info:"+_str);
+				console.log("tag-img-src:"+this.data[m].src);
+			}
+			return new Tag(data);
+		}
+		var data = [
+						{
+							"tag": "daji",
+							"src":"daji.png",
+							"infoArr":["1-1_1_2","1-2_1","1-3","1-4_1_2_3"]
+						},
+						{
+							"tag": "xiaoji",
+							"src":"xiaoji.png",
+							"infoArr":["2-1_1_2","2-2_1","2-3"]
+						},
+						{
+							"tag": "zhongji",
+							"src":"zhongji.png",
+							"infoArr":["3-1_1_2","3-2_1"]
+						},
+						{
+							"tag": "ping",
+							"src":"ping.png",
+							"infoArr":["4-1_1_2","4-2_1","4-3"]
+						}
+					];
+		var tag = createTag(data);
+		document.addEventListener("click",function(){
+			var randomNum = Math.floor(Math.random()*data.length);	// 随机设置抽签结果，开发时可删除
+			tag.setResult(randomNum);
+		},false);
+	</script>
+</body>
+</html>

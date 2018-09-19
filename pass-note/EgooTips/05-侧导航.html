@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>侧导航</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/meyer-reset/2.0/reset.min.css">
+	<style type="text/css">
+		.wrap{width: 100%;min-width: 1000px;margin: 0 auto;}
+		.head,.c{position: relative;width: 1000px;margin: 0 auto;border-bottom: 1px solid #000;}
+		.head{height: 800px;}
+		.c1{height: 600px;}
+		.c2{height: 500px;}
+		.c3{height: 800px;}
+		.c4{height: 1000px;}
+
+
+		/* side-nav */
+		.side-nav{position: absolute;top: 570px;right: -190px;width: 97px;}
+		.side-nav-in{width: 97px;position: fixed;top: 30%;}
+		.side-nav-in li{width: 97px;height: 61px;line-height: 61px;text-align: center;font-size: 24px;font-weight: bold;color: #b4b4b4;border-bottom: 1px solid #000000;cursor: pointer;}
+		.side-nav-in .cur{background-color: #f90;color: #161616;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="head">
+			<!-- side-nav-S -->
+			<div class="side-nav">
+			    <ul class="side-nav-in">
+			        <li class="cur">壹</li>
+			        <li>贰</li>
+			        <li>叁</li>
+			        <li>肆</li>
+			        <li class="turn-top">TOP</li>
+			    </ul>
+			</div>
+			<!-- side-nav-E -->
+		</div>
+		<div class="container">
+			<div class="c c1"></div>
+			<div class="c c2"></div>
+			<div class="c c3"></div>
+			<div class="c c4"></div>
+		</div>
+	</div>
+	<script src="http://ossweb-img.qq.com/images/js/jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+		// 侧导航检测
+		sideNav();
+		function sideNav() {
+		    var clientH = $(window).height();
+		    var st = $(window).scrollTop();
+		    var $sideNav = $('.side-nav');
+		    $(window).on('scroll', function() {
+		        st = $(window).scrollTop();
+		        checkPos();
+		    });
+		    checkPos();
+		    function checkPos() {
+		        $('.c').each(function() {
+		            var $this = $(this);
+		            if (st >= $this.offset().top - 200) {
+		                $sideNav.find('li').eq($this.index()).addClass('cur').siblings('li').removeClass('cur');
+		            }
+		        });
+		    }
+		    $sideNav.on('click', 'li', function() {
+		        var $this = $(this);
+		    	if ($this.index()<=$('.c').length-1) {
+			        $('body,html').animate({scrollTop: $('.c').eq($this.index()).offset().top});
+		    	}
+		    });
+		    $('.turn-top').on('click', function() {
+		        $('body,html').animate({scrollTop: 0});
+		    });
+		}
+	</script>
+</body>
+</html>

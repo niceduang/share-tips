@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script src="http://ossweb-img.qq.com/images/js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+/**
+ * 逆战-a20170614ztg
+ */
+var imgPath = "./images/";
+var c1Info = [
+        {
+            "info":[" 进入竹町阁的特工们，都解除了枪支武装，只携带随身的礼仪性刀剑。而冲突爆发之时，他们都用随身的近战武器上演了一场十八般武艺的对决。","在刀锋乱舞模式中，玩家的跳跃高度将大幅增高，但被限定仅能使用近战武器和武器技能。利用正确的走位和高空跳跃攻击，配合适当的技能，打出最精彩的冷兵器战斗吧！"],
+            "src":"01-1-pic01.jpg",
+            "vid":""
+        },
+        {
+            "info":[" 竹町阁，江户时代的古典小镇，保留了大量珍贵建筑、壁画和雕塑。突击者希望至少破坏三处文物点之一，来打击国际联盟的文化资产。守卫者们当然不会让他们得逞。","在新模式-3点爆破中，有突击者将有3个下包点可供选择。传统的包点易攻难守，但第三个点是凶险无比。双方的兵力都有可能更分散，合理的编配和灵活的变阵成为了胜利的关键。"],
+            "src":"01-2-pic01.jpg",
+            "vid":""
+        }
+    ];
+var c2Info = [
+        {
+            "info":"江户时代的古典，文化艺术品和古建筑云集。随处可见的松竹、古典雅致的亭台楼阁、充满艺术感的浮世绘、雕塑随处可见。典雅宁静的小镇里，却处处暗藏杀机。",
+            "src":["02-1-pic01.jpg","02-1-pic02.jpg","02-1-pic03.jpg","02-1-pic04.jpg"]
+        },
+        {
+            "info":"此处是一座废弃的建筑工地，也是全球最繁华、房价最逆天的金融购物中心的犯罪后花园，各路势力在此云集，一场古惑仔冷兵器大战就此上演。",
+            "src":["02-2-pic01.jpg","02-2-pic02.jpg","02-2-pic03.jpg","02-2-pic04.jpg"]
+        }
+    ];
+var c3Info = [
+        {
+            "title":"沙鹰-西部之王",
+            "info":"逆战首把沙鹰-左轮变形手枪，主宰中东沙漠，制霸美墨荒原。伤害精准速度性能全面提升，冠绝群雄，可击爆空中投掷物，装备享200%经验加成。",
+            "src":"03-xbzw.jpg"
+        },
+        {
+            "title":"沙鹰-狱火之王",
+            "info":"沙鹰-西部之王的特别版，通体采用狱火涂装，用正义的火焰斩妖除魔。",
+            "src":"03-yhzw.jpg"
+        },
+        {
+            "title":"MSR-电离对撞",
+            "info":"枭龙小队顶级狙击手配备的订制特效MSR，精准的量子弹头毙伤目标时可产生电离碰撞特效，专属击杀反馈，装备享200%加成。",
+            "src":"03-dldz.jpg"
+        },
+        {
+            "title":"暗夜龙骑剑",
+            "info":"中古骑士斩龙之剑，以龙血淬炼剑刃，镇魔封妖。在完成使命后与主人一同沉睡，待新的鲜血将其唤醒。",
+            "src":"03-aylqj.jpg"
+        }
+    ];
+function Tab (obj,info) {
+	this.obj = obj;
+	this.info = info;
+	this.bar = this.obj.find('.tab-bar');
+	this.txt = this.obj.find('.txt');
+	this.img = this.obj.find('.tab-cont img');
+	this.tit = '';
+	this.vbtn = this.obj.find('.btn-video');
+	this.iNum = 0;
+}
+Tab.prototype = {
+	changeBar:function(){
+		var _this = this;
+		_this.bar.on('click', 'a', function() {
+			$(this).addClass('cur').siblings('a').removeClass('cur');
+			_this.iNum = $(this).index();
+			_this.tit = $(this).attr('title');
+			_this.changeTxt();
+			_this.changeImg();
+			_this.changeVid();
+		});
+	},
+	changeTxt:function(){
+		var info = '';
+		if (typeof this.info[0].info != 'string') {
+			for (var i = 0; i < this.info[this.iNum].info.length; i++) {
+			    info += '<p>';
+			    info += this.info[this.iNum].info[i];
+			    info += '</p>';
+			}
+		} else {
+			info = '<p>'+this.info[this.iNum].info+'</p>';
+		}
+		if (this.info[0].title) {
+			info = '<h3>'+this.tit+'</h3><p>'+this.info[this.iNum].info+'</p>';
+		}
+		this.txt.html(info);
+	},
+	changeImg:function(){
+		var _this = this;
+		if (typeof this.info[0].src != "string") {
+			this.img.each(function(i){
+			    $(this).attr({
+			        src: imgPath + _this.info[_this.iNum].src[i],
+			        alt: _this.tit
+			    });
+			});
+		} else {
+			this.img.attr({
+			    src: imgPath + _this.info[_this.iNum].src,
+			    alt: _this.tit
+			});
+		}
+	},
+	changeVid:function(){
+		if (this.info[this.iNum].vid) {
+			this.vbtn.attr('data-vid',this.info[this.iNum].vid);
+		}
+	},
+};
+</script>
+</body>
+</html>

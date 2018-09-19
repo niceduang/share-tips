@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas-雪碧图</title>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script type="text/javascript">
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			var ctx = canvas.getContext('2d');
+			canvas.width = 600;
+			canvas.height = 600;
+			canvas.style.border = '1px solid #f00';
+			var hz = 12;// 1s 多少帧
+			var dir = 'b';
+			var img = new Image();
+			img.src = 'images/game01.png';
+			function checkDir(d){
+				switch(d){
+					case 'b':// 0,往下
+						return 0;
+					break;
+					case 'l':// 1,往左
+						return 1;
+					break;
+					case 'r':// 2,往右
+						return 2;
+					break;
+					case 't':// 3,往上
+						return 3;
+					break;
+				}
+			}
+			img.onload = function(){
+				// ctx.drawImage(IMG/SRC, SourceX, SourceY, SourceWIDTH, SourceHEIGHT, X, Y, WIDTH, HEIGHT);
+				var num = 0;
+				setInterval(function(){
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					ctx.drawImage(img, num*200/4, 260/4*checkDir(dir), 200/4, 260/4, 250, 250, 200/4, 260/4);
+					num++;
+					num%=4;
+				},1000/hz);
+			}
+			window.onkeydown = function(ev){
+				var ev = ev || window.event;
+				// console.log(ev.keyCode);// 37-38-39-40
+				switch(ev.keyCode){
+					case 37:
+						dir = 'l';
+					break;
+					case 38:
+						dir = 't';
+					break;
+					case 39:
+						dir = 'r';
+					break;
+					case 40:
+						dir = 'b';
+					break;
+				}
+			}
+		}
+	</script>
+</body>
+</html>
