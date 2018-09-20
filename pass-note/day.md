@@ -1,8 +1,5 @@
-- [微信互动投票平台](https://juejin.im/entry/59a11e5b6fb9a024a04b0429?utm_source=gold_browser_extension)
-- [学习博客](https://juejin.im/entry/59a4296351882524463117b4?utm_source=gold_browser_extension)
 
 
-2017-09-01
 - [阿里云](https://zhuanlan.zhihu.com/p/27998046)
 
 

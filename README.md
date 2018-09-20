@@ -8,6 +8,8 @@
 
 ### Todos
 - [ ] 项目从0到1，项目设计重构打包上线发布,玩Nginx
+- [ ] [微信互动投票平台](https://juejin.im/entry/59a11e5b6fb9a024a04b0429?utm_source=gold_browser_extension)
+- [ ] https://my.oschina.net/cjlice
 * [不仅仅是前端er——折腾服务器武装自己](https://segmentfault.com/a/1190000013242438)
 - [ ] 
 - [ ] vue项目部署发布
@@ -42,6 +44,9 @@
 
 - [ ] [如何用node开发自己的cli工具并发布到NPM ](https://github.com/pkwenda/blog/issues/7)
 - [ ] [laravel](https://laravel.com/)
+- [ ] [博客阅读](https://juejin.im/entry/59a4296351882524463117b4?utm_source=gold_browser_extension)
+
+
 ```
 // 需要考虑请求发送成功与否
 // 成功：但是状态不是200的情况
@@ -109,6 +114,12 @@ let b=[...str].reverse().join("");//drow olleh
 - 
 
 
+- [ ] 
+
+
+
+### canvas
+- http://louiszhai.github.io/res/canvasDraw/#/
 
 
 
