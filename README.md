@@ -7,14 +7,23 @@
 
 
 ### Todos
+#### 项目从0到1
 - [ ] 项目从0到1，项目设计重构打包上线发布,玩Nginx
 - [ ] [微信互动投票平台](https://juejin.im/entry/59a11e5b6fb9a024a04b0429?utm_source=gold_browser_extension)
+- [ ] [阿里云搭建](https://zhuanlan.zhihu.com/p/27998046)
+- [ ] [实战WebSocket聊天室：从开发到部署上线](https://juejin.im/post/5a68117af265da3e290c5e29?utm_source=gold_browser_extension)
 - [ ] https://my.oschina.net/cjlice
-* [不仅仅是前端er——折腾服务器武装自己](https://segmentfault.com/a/1190000013242438)
+- [ ] https://edu.aliyun.com/course/70/lesson/list?utm_campaign=aliyunedu&utm_medium=images&utm_source=qq&utm_content=m_25163
+- [ ] https://edu.aliyun.com/course/43/lesson/list?spm=5176.8764728.aliyun-edu-course-tab.2.LUh1tm&previewAs=guest#guide
+- [ ] [不仅仅是前端er——折腾服务器武装自己](https://segmentfault.com/a/1190000013242438)
 - [ ] 
+
+#### vue react
 - [ ] vue项目部署发布
 - [ ] react全家桶
 - [ ] [Hybrid](https://www.imooc.com/learn/850)
+
+#### Hybrid
 ```
 1. 什么是Hybrid
 2. H5如何与Native通信
@@ -131,3 +140,30 @@ let b=[...str].reverse().join("");//drow olleh
 * [找背景图](https://alpha.wallhaven.cc/)
 * [搜狐智能社](http://my.tv.sohu.com/user/299736457#t0)
 * [找设计](https://dribbble.com/)
+* [前端技能汇总](https://segmentfault.com/a/1190000010121230)
+
+
+
+
+### 回顾快捷键
+```
+- Ctrl+L：选择行，重复可依次增加选择下一行
+- Ctrl+Shift+A：选择当前标签内容
+- Ctrl+Shift+Enter 在上一行插入新行
+- Ctrl+Y 反撤销
+```
+
+
+
+
+### 工作日志
+- [专注2D/3D可视化、前端开发](https://parksben.github.io/)
+
+
+
+https://my.oschina.net/blogshi
+https://my.oschina.net/blogshi/blog/191675
+https://my.oschina.net/blogshi/blog/196115
+https://my.oschina.net/blogshi/blog/263005
+https://my.oschina.net/blogshi/blog/269294
+https://my.oschina.net/blogshi/blog/272145
