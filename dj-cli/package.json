@@ -1,0 +1,19 @@
+{
+  "name": "dj-cli",
+  "version": "1.0.0",
+  "description": "dj-cli",
+  "main": "index.js",
+  "bin": {
+    "demo": "./bin/demo.js",
+    "dj-run": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "npm"
+  ],
+  "author": "duang",
+  "license": "ISC"
+}
