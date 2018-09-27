@@ -6,8 +6,8 @@
 	<style type="text/css">
 		*{margin: 0;padding: 0;}
 		.box{width: 500px;margin: 0 auto;}
-		.items{height: 500px;border: 1px solid #000;}
-		.cur{background-color: #f00;}
+		.items{height: 500px;border: 1px solid #000;transition: opacity 0.8s;opacity: 0;}
+		.ani{background-color: #f00;opacity: 1;}
 	</style>
 </head>
 <body>
@@ -23,7 +23,7 @@
 		<div class="items">09</div>
 		<div class="items">10</div>
 	</div>
-	<script src="http://ossweb-img.qq.com/images/js/jquery/jquery-1.11.3.min.js"></script>
+	<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		/**
 		 * 什么时候在可视区：
@@ -34,20 +34,20 @@
 		var $window = $(window);
 		var screenHeight = $window.height();
 		var st = $window.scrollTop();
-		$window.on('scroll',function(){
+		$window.on('scroll', function() {
 			st = $(this).scrollTop();
-			checkCur(st);
+			checkPos(st);
 		});
-		checkCur(st);
-		function checkCur(st){
-			$('.items').each(function(){
+		checkPos(st);
+		function checkPos(st) {
+			$('.items').each(function() {
 				var $this = $(this);
 				var offsetTop = $this.offset().top;
 				var height = $this.height();
-				if (st>=(offsetTop-screenHeight)&&st<(offsetTop+height)) {
-					$this.addClass('cur');
-				}else{
-					$this.removeClass('cur');
+				if (st >= (offsetTop - screenHeight) && st < (offsetTop + height)) {
+					$this.addClass('ani');
+				} else {
+					$this.removeClass('ani');
 				}
 			});
 		}
