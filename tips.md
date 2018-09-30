@@ -83,5 +83,3 @@ var total = new Date(year,month,0).getDate();
 ```
 速度 = (目标点 - 当前值)/系数
 ```
-
-- 
