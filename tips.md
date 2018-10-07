@@ -1,7 +1,7 @@
 ### 关于可扩展星，健壮性，容错性的小技巧
 
 #### 默认值
-```
+```js
 // 给函数赋值的类似操作很常见：
 function getInfoError(ops) {
     var name = ops.name || '默认laowang';
@@ -33,12 +33,12 @@ getInfo(user2);
 ```
 
 - 时间转换
-```
+```js
 new Date().toLocaleString();
 ```
 
 - 时间格式化
-```
+```js
 const formatTime = date => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
@@ -57,7 +57,7 @@ const formatNumber = n => {
 ```
 
 - URL参数携带信息
-```
+```js
 function getUrlName(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
@@ -67,7 +67,7 @@ function getUrlName(name) {
 ```
 
 - 获取当月天数
-```
+```js
 var total = new Date(year,month,0).getDate();
 ```
 
