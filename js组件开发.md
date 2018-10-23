@@ -1,7 +1,7 @@
 ### 组件开发
 - 什么是组件？
     - 对面向对象的深入应用（UI组件，功能组件）
-    - 将 配置参数、方法、事件，三者进行分离
+    - 将 `配置参数、方法、事件`，三者进行分离
 - 创建自定义事件
     - 有利于多人协作开发代码
     - 如何去挂载自定义事件与事件函数
@@ -13,7 +13,7 @@
 
 
 + 挂载与暴露
-```
+```js
 ;(function(w){
     var Tab = function(){
         // 
@@ -26,7 +26,7 @@
 ```
 
 + 注册到jQuery方法
-```
+```js
 ;(function(w,$){
     var Tab = function(){
         // 
@@ -50,7 +50,7 @@
 
 
 #### 命名空间
-```
+```js
 var roles = (function(){
     function bindHandle(){
         // handle
@@ -59,7 +59,7 @@ var roles = (function(){
         bindHandle();
     }
     return {
-        init:init
+        init: init
     }
 })();
 ```

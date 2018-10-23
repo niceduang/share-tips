@@ -1,11 +1,11 @@
 ### 浅拷贝
 - 扩展运算符
-```
+```js
 const obj = {...oldObj};
 const arr = [...oldArr];
 ```
 - JSON.stringify
-```
+```js
 let movie = {
   name:"金刚",
   poster:{
@@ -21,7 +21,7 @@ console.log(movie,obj);
 ```
 
 #### 深拷贝
-```
+```js
 const clone = (obj) => {
   let _obj = null;
   if (typeof obj == 'object' && obj !== null) {

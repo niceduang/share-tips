@@ -21,9 +21,9 @@
 #### vue react
 - [ ] vue项目部署发布
 - [ ] react全家桶
-- [ ] [Hybrid](https://www.imooc.com/learn/850)
 
 #### Hybrid
+- [ ] [Hybrid](https://www.imooc.com/learn/850)
 ```
 1. 什么是Hybrid
 2. H5如何与Native通信
@@ -51,12 +51,12 @@
     * 音乐随机上一首下一首
 
 
-- [ ] [如何用node开发自己的cli工具并发布到NPM ](https://github.com/pkwenda/blog/issues/7)
-- [ ] [laravel](https://laravel.com/)
+- [ ] [如何用node开发自己的cli工具并发布到NPM](https://github.com/pkwenda/blog/issues/7)
 - [ ] [博客阅读](https://juejin.im/entry/59a4296351882524463117b4?utm_source=gold_browser_extension)
+- [ ] [laravel](https://laravel.com/)
 
 
-```
+```js
 // 需要考虑请求发送成功与否
 // 成功：但是状态不是200的情况
 // 成功：状态是200，但是没有数据的情况
@@ -94,23 +94,22 @@ $.ajax({
     });
 ```
 
-- [ ] 
-
-
 
 ### 近期基础汇总
 
 - 什么情况下会碰到跨域问题？有哪些解决方法？
 ```
-跨域问题是这是浏览器为了安全实施的同源策略导致的，同源策略限制了来自不同源的document、脚本，同源的意思就是两个URL的域名、协议、端口要完全相同。
+跨域问题是这是浏览器为了安全实施的同源策略导致的，
+同源策略限制了来自不同源的document、脚本，同源的意思就是两个URL的域名、协议、端口要完全相同。
 script标签jsonp跨域、nginx反向代理、node.js中间件代理跨域、后端在头部信息设置安全域名、后端在服务器上设置cors。
 ```
 
 - 翻转一个字符串
-```
+```js
 // 思路就是先将字符串转成一个数组，然后用数组的reverse()+join()方法
-let a="hello word";
-let b=[...str].reverse().join("");//drow olleh
+let str = 'hello word';
+let retStr = [...str].reverse().join('');//drow olleh
+console.log(retStr)
 ```
 
 
