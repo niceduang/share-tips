@@ -1,4 +1,5 @@
-### AJAX
+# AJAX
+
 - AJAX
     - 异步的JavaScript和XML
 - 作用

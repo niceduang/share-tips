@@ -1,47 +1,47 @@
 const init = (m, ms = 500) => {
 	let promise = new Promise((resolve, reject) => {
-		setTimeout(resolve, ms, m);
-	});
-	return promise;
+		setTimeout(resolve, ms, m)
+	})
+	return promise
 }
-// let p1 = init(110);
-// let p2 = init(120, 1000);
+// let p1 = init(110)
+// let p2 = init(120, 1000)
 
 // // 链式
 // p1.then(m => {
-// 		console.log(m);
-// 		return p2;
+// 		console.log(m)
+// 		return p2
 // 	})
 // 	.then(res => {
-// 		console.log(res);
-// 	});
+// 		console.log(res)
+// 	})
 
 // // all
 // Promise.all([p1, p2]).then(res => {
-// 	console.log(res);
-// });
+// 	console.log(res)
+// })
 
 // // race
 // Promise.race([p1, p2]).then(res => {
-// 	console.log(res);
-// });
+// 	console.log(res)
+// })
 
 // async
 const run = async () => {
-	let p1 = await init(1);
+	let p1 = await init(1)
 	console.log({
 		p1
-	});
+	})
 	try {
-		let p2 = await init(2, 1000);
+		let p2 = await init(2, 1000)
 		console.log({
 			p2
-		});
+		})
 	} catch (e) {
-		console.log(e);
+		console.log(e)
 	}
 }
-run();
+run()
 
 // 异步处理-Promise的方式重构
 {
@@ -51,15 +51,15 @@ run();
 				type: 'get',
 				url: 'http://localhost:3000/apiKey',
 				success: function(data) {
-					let key = data;
-					resolve(key);
+					let key = data
+					resolve(key)
 				},
 				error: function(err) {
-					reject(err);
+					reject(err)
 				}
-			});
-		});
-	};
+			})
+		})
+	}
 	let getTokenPromise = function(key) {
 		return new Promsie(function(resolve, reject) {
 			$.ajax({
@@ -69,18 +69,18 @@ run();
 					key: key
 				},
 				success: function(data) {
-					resolve(data);
+					resolve(data)
 				},
 				error: function(err) {
-					reject(err);
+					reject(err)
 				}
-			});
-		});
-	};
+			})
+		})
+	}
 
 	let getDataPromise = function(data) {
-		let token = data.token;
-		let userId = data.userId;
+		let token = data.token
+		let userId = data.userId
 
 		return new Promsie(function(resolve, reject) {
 			$.ajax({
@@ -91,27 +91,27 @@ run();
 					userId: userId
 				},
 				success: function(data) {
-					resolve(data);
+					resolve(data)
 				},
 				error: function(err) {
-					reject(err);
+					reject(err)
 				}
-			});
-		});
-	};
+			})
+		})
+	}
 	getKeyPromise()
 		.then(function(key) {
-			return getTokenPromise(key);
+			return getTokenPromise(key)
 		})
 		.then(function(data) {
-			return getDataPromise(data);
+			return getDataPromise(data)
 		})
 		.then(function(data) {
-			console.log('业务数据：', data);
+			console.log('业务数据：', data)
 		})
 		.catch(function(err) {
-			console.log(err);
-		});
+			console.log(err)
+		})
 }
 
 // 异步处理-Async/Await的方式重构
@@ -122,15 +122,15 @@ run();
 				type: 'get',
 				url: 'http://localhost:3000/apiKey',
 				success: function(data) {
-					let key = data;
-					resolve(key);
+					let key = data
+					resolve(key)
 				},
 				error: function(err) {
-					reject(err);
+					reject(err)
 				}
-			});
-		});
-	};
+			})
+		})
+	}
 	let getTokenPromise = function(key) {
 		return new Promsie(function(resolve, reject) {
 			$.ajax({
@@ -140,17 +140,17 @@ run();
 					key: key
 				},
 				success: function(data) {
-					resolve(data);
+					resolve(data)
 				},
 				error: function(err) {
-					reject(err);
+					reject(err)
 				}
-			});
-		});
-	};
+			})
+		})
+	}
 	let getDataPromise = function(data) {
-		let token = data.token;
-		let userId = data.userId;
+		let token = data.token
+		let userId = data.userId
 
 		return new Promsie(function(resolve, reject) {
 			$.ajax({
@@ -161,23 +161,23 @@ run();
 					userId: userId
 				},
 				success: function(data) {
-					resolve(data);
+					resolve(data)
 				},
 				error: function(err) {
-					reject(err);
+					reject(err)
 				}
-			});
-		});
-	};
-	async function main() {
-		let key = await getKeyPromise();
-		let loginData = await getTokenPromise(key);
-		let busiData = await getDataPromise(loginData);
-
-		console.log('业务数据：', busiData);
+			})
+		})
 	}
-	main();
-	console.log('不影响主线程执行');
+	async function main() {
+		let key = await getKeyPromise()
+		let loginData = await getTokenPromise(key)
+		let busiData = await getDataPromise(loginData)
+
+		console.log('业务数据：', busiData)
+	}
+	main()
+	console.log('不影响主线程执行')
 }
 
 
