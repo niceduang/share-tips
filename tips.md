@@ -1,6 +1,36 @@
-### 关于可扩展星，健壮性，容错性的小技巧
+# 关于可扩展，健壮，容错的小技巧
 
-#### 默认值
+## 业务相关判断
+- 属性检测
+```js
+// 《编写可维护的JavaScript》
+// 不推荐的写法：使用undefined和null来检测一个属性是否存在
+if (obj['name'] !== undefined) {
+  console.log('name属性存在'); // 若obj.name为undefined时则会导致判断出错
+}
+
+if (obj['name'] !== null) {
+  console.log('name属性存在'); // 若obj.name为null时则会导致判断出错
+}
+
+
+// 推荐的写法：使用in运算符来检测对象属性是否存在，使用hasOwnProperty方法来检测不包含原型链上的对象属性是否存在
+if ('name' in obj) {
+  console.log('name属性存在');
+}
+
+if (obj.hasOwnProperty('name')) {
+  console.log('name属性存在');
+}
+```
+- 判断数组的
+```js
+function isArray(a) {
+  Array.isArray ? Array.isArray(a) : Object.prototype.toString.call(a) === '[object Array]';
+}
+```
+
+- 默认值
 ```js
 // 给函数赋值的类似操作很常见：
 function getInfoError(ops) {
