@@ -45,44 +45,44 @@ run()
 
 // 异步处理-Promise的方式重构
 {
-	let getKeyPromise = function() {
-		return new Promsie(function(resolve, reject) {
+	let getKeyPromise = function () {
+		return new Promsie(function (resolve, reject) {
 			$.ajax({
 				type: 'get',
 				url: 'http://localhost:3000/apiKey',
-				success: function(data) {
+				success: function (data) {
 					let key = data
 					resolve(key)
 				},
-				error: function(err) {
+				error: function (err) {
 					reject(err)
 				}
 			})
 		})
 	}
-	let getTokenPromise = function(key) {
-		return new Promsie(function(resolve, reject) {
+	let getTokenPromise = function (key) {
+		return new Promsie(function (resolve, reject) {
 			$.ajax({
 				type: 'get',
 				url: 'http://localhost:3000/getToken',
 				data: {
 					key: key
 				},
-				success: function(data) {
+				success: function (data) {
 					resolve(data)
 				},
-				error: function(err) {
+				error: function (err) {
 					reject(err)
 				}
 			})
 		})
 	}
 
-	let getDataPromise = function(data) {
+	let getDataPromise = function (data) {
 		let token = data.token
 		let userId = data.userId
 
-		return new Promsie(function(resolve, reject) {
+		return new Promsie(function (resolve, reject) {
 			$.ajax({
 				type: 'get',
 				url: 'http://localhost:3000/getData',
@@ -90,69 +90,69 @@ run()
 					token: token,
 					userId: userId
 				},
-				success: function(data) {
+				success: function (data) {
 					resolve(data)
 				},
-				error: function(err) {
+				error: function (err) {
 					reject(err)
 				}
 			})
 		})
 	}
 	getKeyPromise()
-		.then(function(key) {
+		.then(function (key) {
 			return getTokenPromise(key)
 		})
-		.then(function(data) {
+		.then(function (data) {
 			return getDataPromise(data)
 		})
-		.then(function(data) {
+		.then(function (data) {
 			console.log('业务数据：', data)
 		})
-		.catch(function(err) {
+		.catch(function (err) {
 			console.log(err)
 		})
 }
 
 // 异步处理-Async/Await的方式重构
 {
-	let getKeyPromise = function() {
-		return new Promsie(function(resolve, reject) {
+	let getKeyPromise = function () {
+		return new Promsie(function (resolve, reject) {
 			$.ajax({
 				type: 'get',
 				url: 'http://localhost:3000/apiKey',
-				success: function(data) {
+				success: function (data) {
 					let key = data
 					resolve(key)
 				},
-				error: function(err) {
+				error: function (err) {
 					reject(err)
 				}
 			})
 		})
 	}
-	let getTokenPromise = function(key) {
-		return new Promsie(function(resolve, reject) {
+	let getTokenPromise = function (key) {
+		return new Promsie(function (resolve, reject) {
 			$.ajax({
 				type: 'get',
 				url: 'http://localhost:3000/getToken',
 				data: {
 					key: key
 				},
-				success: function(data) {
+				success: function (data) {
 					resolve(data)
 				},
-				error: function(err) {
+				error: function (err) {
 					reject(err)
 				}
 			})
 		})
 	}
-	let getDataPromise = function(data) {
+	let getDataPromise = function (data) {
 		let token = data.token
 		let userId = data.userId
 
-		return new Promsie(function(resolve, reject) {
+		return new Promsie(function (resolve, reject) {
 			$.ajax({
 				type: 'get',
 				url: 'http://localhost:3000/getData',
@@ -160,10 +160,10 @@ run()
 					token: token,
 					userId: userId
 				},
-				success: function(data) {
+				success: function (data) {
 					resolve(data)
 				},
-				error: function(err) {
+				error: function (err) {
 					reject(err)
 				}
 			})
