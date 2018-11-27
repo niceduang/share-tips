@@ -69,3 +69,27 @@ var roles = (function(){
 - 火影重构对话打字自定义事件
 
 - [ ] [datePicker](https://www.imooc.com/learn/820)
+
+#### js 写法
+```js
+let abc = (function () {
+  let Handle = function (obj, status) {
+    this.obj = obj
+    this.status = status || 1
+  }
+  Handle.prototype = {
+    setInfo() {
+      // ...
+      return this
+    },
+    setStatus() {
+      // ...
+      return this
+    }
+  }
+  // 暴露构造函数接口
+  return function (obj) {
+    return new Handle(obj)
+  }
+})()
+```

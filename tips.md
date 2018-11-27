@@ -101,6 +101,36 @@ function getUrlName(name) {
 var total = new Date(year,month,0).getDate();
 ```
 
+- 可视区
+  - 入场动画、出场动画
+  ```js
+    /**
+		 * 什么时候在可视区：
+		 * window.scrollTop>e.offsetTop-screenHeight&&window.scrollTop<e.offsetTop+e.height
+		 * 1. 第一种情况，向上滚动(元素跑到可视区以上即为看不到了)
+		 * 2. 另一种情况，向下滚动(元素跑到可视区以下也为看不到了)
+		 */
+		var $window = $(window)
+		var screenHeight = $window.height()
+		var st = $window.scrollTop()
+		$window.on('scroll', function() {
+			st = $(this).scrollTop()
+			checkPos(st)
+		})
+		checkPos(st)
+		function checkPos(st) {
+			$('.items').each(function() {
+				var $this = $(this)
+				var offsetTop = $this.offset().top
+				var height = $this.height()
+				if (st >= (offsetTop - screenHeight) && st < (offsetTop + height)) {
+					$this.addClass('ani')
+				} else {
+					$this.removeClass('ani')
+				}
+			})
+		}
+  ```
 
 - 运动公式
 - 弹性
@@ -112,4 +142,95 @@ var total = new Date(year,month,0).getDate();
 - 缓冲
 ```
 速度 = (目标点 - 当前值)/系数
+```
+
+- 伪数组转数组
+```js
+// 常用如下
+let lis = [].slice.call(document.querySelectorAll('li'));
+```
+  - 原理
+    ```js
+    Array.prototype.newSlice = function () {
+        let start = 0;
+        let end = this.length;
+        if (arguments.length == 1) {
+            start = arguments[0];
+        } else if (arguments.length == 2) {
+            start = arguments[0];
+            end = arguments[1];
+        }
+        let arr = [];
+        for (let i = start; i < end; i++) {
+            arr.push(this[i]);
+        }
+        return arr;
+    }
+    ```
+
+- 回调函数
+```js
+const getRandom = (maxNum, callback) => {
+  try {
+    let num = Math.random() * maxNum
+    callback(null, num)// 约定俗成第一个参数谣传err
+  } catch (err) {
+    callback(err)// 第二个参数mull此时可以省去
+  }
+}
+
+let num1 = getRandom(4, (err, num) => {
+  // if (err) {
+  //   console.log(err)
+  //   return null
+  // }
+  // return num
+  if (err) {
+    console.log('err')
+  } else {
+    console.log(num)
+  }
+})
+let num2 = getRandom('abc', (err, num) => {
+  // if (err) {
+  //   console.log(err)
+  //   return null
+  // }
+  // return num
+  if (err) {
+    console.log('err')
+  } else {
+    console.log(num)
+  }
+})
+// console.log({ num1, num2 })
+```
+### 移动端video的坑
+- 关于自动播放
+> - video的autoplay在移动端浏览器上基本失效
+> - 移动端要有用户交互才能触发事件，如click、touch；
+> - ios协议蜂窝数据下不得开启音视频的自动播放
+
+- 如上，所以只能加一个引导点击播放
+
+- poster
+> - 可能因为内核不同，在微信浏览器/safari/chrome上默认展示的poster各有不同
+> - chrome应用了默认行为截取了视频第一帧作为显示
+> - 微信浏览器和safari显示空白，效果就是孤零零的播放图放在一张白纸上
+
+- 如上，通过canvas截取视频第一帧作为默认显示的图片
+```js
+let video
+const cut = function () {
+  let Dom
+  let scale
+  let canvas = document.createElement('canvas')
+  canvas.width = video.videoWidth * scale
+  canvas.height = video.videoHeight * scale // 设定宽高比
+  canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height) // 将视频此刻帧数画入画布
+  let img = document.createElement('img')
+  img.src = canvas.toDataURL('image/png')
+  Dom.appendChild(img) // 写入到Dom
+}
+video.addEventListener('loadeddata', cut) // 在视频帧数已加载时执行截取
 ```
