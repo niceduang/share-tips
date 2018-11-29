@@ -1,20 +1,8 @@
 ### 扫盲贴
 
-#### 结构赋值
-```
-let data = {
-    name:"laowang",
-    nameEnglish:"Lao.wang.wang",
-    age:23,
-    gender:"xy"
-}
-let {name,nameEnglish:nameEN,gender="xx",age:a=20,job="web developer"} = data;
-// 剩余
-let {a,b,c} = obj;
-```
 
 #### set
-```
+```js
 let s = new Set(["a","b","c"]);
 console.log(s);
 // add 返回的依然是set对象，可以继续执行他下面的方法，注意不能是相同
@@ -44,7 +32,7 @@ console.log(keys.next());
 
 
 ### 字符串新增常用
-```
+```js
 let str = "duangnicewell";
 console.log(str.indexOf("ll") != -1);
 console.log(str.includes("ll"));
@@ -55,7 +43,7 @@ let _str = str.repeat(3);
 console.log(_str);
 ```
 ### 数组新增常用
-```
+```js
 let arr1 = new Array(10,20,30);
 // 注意传入一个为数字值的时候竟然 length 变成100了
 let arr2 = new Array(100);
@@ -74,7 +62,7 @@ console.log(Array.isArray(elsArr));// true
 // findIndex
 ```
 ### 对象新增常用
-```
+```js
 var name = "laowang";// laowang,laoli
 let obj = {
     [name]:"name~"

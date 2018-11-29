@@ -17,7 +17,7 @@
 
 - 追踪->上传
 1. `git add .`
-2. `git commit -m "this is log~"`||`git commit -a -m 'xxx'`
+2. `git commit -m "this is log~"`||`git commit -a -m 'xxx'`||`git commit -am 'xxx'`
 3. `git push -u origin master`||`git push`
 
 - 操作远程库

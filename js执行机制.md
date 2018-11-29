@@ -27,3 +27,43 @@ console.log('代码执行结束');
 - 除了广义的同步任务和异步任务，我们对任务有更精细的定义
     - macro-task(宏任务)：包括整体代码script，setTimeout，setInterval
     - micro-task(微任务)：Promise，process.nextTick
+- 观战代码
+```js
+console.log('1');
+
+setTimeout(function() {
+    console.log('2');
+    process.nextTick(function() {
+        console.log('3');
+    })
+    new Promise(function(resolve) {
+        console.log('4');
+        resolve();
+    }).then(function() {
+        console.log('5')
+    })
+})
+process.nextTick(function() {
+    console.log('6');
+})
+new Promise(function(resolve) {
+    console.log('7');
+    resolve();
+}).then(function() {
+    console.log('8')
+})
+
+setTimeout(function() {
+    console.log('9');
+    process.nextTick(function() {
+        console.log('10');
+    })
+    new Promise(function(resolve) {
+        console.log('11');
+        resolve();
+    }).then(function() {
+        console.log('12')
+    })
+})
+```
+- 仔细分析上述代码执行过程，画表格分析透彻
