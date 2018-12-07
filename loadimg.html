@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" value="load">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
+  <script>
+    let imgsList = [
+        {
+          src: 'http://static.ws.126.net/f2e/ent/ent_painting2017/images/cover_v2.jpg',
+          imgW: '750',
+          imgH: '1206',
+        },
+        {
+          src: 'http://static.ws.126.net/f2e/ent/ent_painting2017/images/p1.jpg',
+          imgW: '1875',
+          imgH: '3015'
+        },
+        {
+          src: 'http://static.ws.126.net/f2e/ent/ent_painting2017/images/p2.jpg',
+          imgW: '1875',
+          imgH: '3015'
+        },
+        {
+          src: 'http://static.ws.126.net/f2e/ent/ent_painting2017/images/p3.jpg',
+          imgW: '1875',
+          imgH: '3015'
+        }
+      ]
+    class DLoad {
+      constructor(arr) {
+        this.imgs = arr
+        this.init()
+      }
+      loadImg(arr) {
+        let loadPromises = arr.map((item, index) => {
+          let promise = new Promise((resolve, reject) => {
+            let img = new Image()
+            img.src = item.src
+            img.w = item.imgW
+            img.h = item.imgH
+            img.onload = () => {
+              resolve(img)
+            }
+            img.onerror = () => {
+              reject()
+            }
+          })
+          return promise
+        })
+        return Promise.all(loadPromises)
+      }
+      async init() {
+        await this.loadImg(this.imgs)
+      }
+      onEnd(cb) {
+        cb && cb()
+      }
+    }
+    let img = new DLoad(imgsList)
+    // img.onStart(() => {
+    //   console.log(`start:${new Date().getTime()}`)
+    // })
+    img.onEnd(() => {
+      console.log(`end:${new Date().getTime()}`)
+    })
+  </script>
+</body>
+</html>
