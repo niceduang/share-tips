@@ -29,6 +29,20 @@ function isArray(a) {
 }
 ```
 
+## 业务判断
+```js
+var a = null
+if(!a && typeof a === 'object'){
+  console.log('null')
+}else if(!a && typeof a === 'undefined'){
+  console.log('undefined')
+}else if(!a && typeof a === 'string'){
+  console.log('空字符串')
+}else{
+  console.log('其它')
+}
+```
+
 ## 默认值
 ```js
 // 给函数赋值的类似操作很常见：
