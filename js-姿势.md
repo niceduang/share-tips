@@ -22,6 +22,7 @@ if (obj.hasOwnProperty('name')) {
   console.log('name属性存在');
 }
 ```
+
 ## 判断数组
 ```js
 function isArray(a) {
@@ -87,7 +88,7 @@ function getInfo({name: 'laowang', age: '9000'} = {}){
 ```js
 // 需求：根据颜色找出对应的水果
 
-// bad
+// bad,不论是if/esle或者switch/case代码都比较冗余
 function test(color) {
   switch (color) {
     case 'red':
