@@ -10,6 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "http-proxy-middleware": "^0.19.1"
+    "cors": "^2.8.5",
+    "express-http-proxy": "^1.5.0",
+    "http-proxy": "^1.17.0",
+    "http-proxy-middleware": "^0.19.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "morgan": "^1.9.1"
   }
 }

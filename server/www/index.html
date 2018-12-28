@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{margin: 0;padding: 0;}
+    .btns{
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-around;
+    }
+    .btn{
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 5px 10px;
+      text-decoration: none;
+      color: #acb;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="btns">
+    <a href="javascript:;" class="btn btn-1">btn-get</a>
+    <a href="javascript:;" class="btn btn-2">btn-get</a>
+    <a href="javascript:;" class="btn btn-3">btn-post</a>
+    <a href="javascript:;" class="btn btn-4">btn-get</a>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
+  <script>
+    // GET
+    $('.btn-1').on('click', () => {
+      $.ajax({
+        url: 'v2/music/search',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          q: '张杰'
+        }
+      })
+      .done((res) => {
+        console.log({ res })
+      })
+      .fail((err) => {
+        console.log(err)
+      })
+    })
+    
+    // GET
+    $('.btn-2').on('click', () => {
+      $.ajax({
+        url: 'getPlayerGloryRank',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          appid: '10005',
+          seasonid: 'KPL2018S1'
+        }
+      })
+        .done((res) => {
+          console.log({ res })
+        })
+        .fail((err) => {
+          console.log(err)
+        })
+    })
+    // GET
+    $('.btn-4').on('click', () => {
+      $.ajax({
+        url: 'http://api.tgatv.qq.com/app/match/getPlayerGloryRank',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          appid: '10005',
+          seasonid: 'KPL2018S1'
+        }
+      })
+        .done((res) => {
+          console.log({ res })
+        })
+        .fail((err) => {
+          console.log(err)
+        })
+    })
+
+    // POST
+    $('.btn-3').on('click', () => {
+      $.ajax({
+        url: 'api',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          key: 'c9d1eb9811e648a49ece24b7cb1065e9',
+          info: '武汉',
+          userId: 1
+        }
+      })
+      .done((res) => {
+        console.log({ res })
+      })
+      .fail((err) => {
+        console.log(err)
+      })
+    })
+  </script>
+</body>
+</html>
