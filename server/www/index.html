@@ -33,20 +33,21 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
   <script>
+    let uri = `http://127.0.0.1:3000/`
     // GET
     $('.btn-1').on('click', () => {
       $.ajax({
-        url: 'v2/music/search',
+        url: `${uri}v2/music/search`,
         type: 'GET',
         dataType: 'json',
         data: {
           q: '张杰'
         }
       })
-      .done((res) => {
+      .done(res => {
         console.log({ res })
       })
-      .fail((err) => {
+      .fail(err => {
         console.log(err)
       })
     })
@@ -54,7 +55,7 @@
     // GET
     $('.btn-2').on('click', () => {
       $.ajax({
-        url: 'getPlayerGloryRank',
+        url: `${uri}getPlayerGloryRank`,
         type: 'GET',
         dataType: 'json',
         data: {
@@ -62,12 +63,12 @@
           seasonid: 'KPL2018S1'
         }
       })
-        .done((res) => {
-          console.log({ res })
-        })
-        .fail((err) => {
-          console.log(err)
-        })
+      .done(res => {
+        console.log({ res })
+      })
+      .fail(err => {
+        console.log(err)
+      })
     })
     // GET
     $('.btn-4').on('click', () => {
@@ -80,18 +81,18 @@
           seasonid: 'KPL2018S1'
         }
       })
-        .done((res) => {
-          console.log({ res })
-        })
-        .fail((err) => {
-          console.log(err)
-        })
+      .done(res => {
+        console.log({ res })
+      })
+      .fail(err => {
+        console.log(err)
+      })
     })
 
     // POST
     $('.btn-3').on('click', () => {
       $.ajax({
-        url: 'api',
+        url: `${uri}api`,
         type: 'POST',
         dataType: 'json',
         data: {
@@ -100,10 +101,10 @@
           userId: 1
         }
       })
-      .done((res) => {
+      .done(res => {
         console.log({ res })
       })
-      .fail((err) => {
+      .fail(err => {
         console.log(err)
       })
     })
