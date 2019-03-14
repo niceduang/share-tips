@@ -74,6 +74,7 @@
     - `:wq`退出
     - `:x`保存并退出
     - `:q!`强制无条件不保存退出
+- clone到当前目录下的指定目录`git clone https://xxx.git my-project`
 
 ## 回滚自己的分支&公共分支
 - [reset](https://juejin.im/entry/5ad4b8a86fb9a028e46f1edd?utm_source=gold_browser_extension)
@@ -222,3 +223,15 @@ git branch -m dev develop
 
 $ git push origin develop
 ```
+
+
+#### github-已有仓库
+- 推送文件到已存在仓库
+  ```shell
+  git init
+  git add README.md
+  git commit -m "first commit"
+  git remote add origin https://github.com/nicewell/sery-site.git
+  git push -u origin master
+  ```
+- ![](https://upload-images.jianshu.io/upload_images/5208955-886cf28d95481a0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
