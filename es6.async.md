@@ -26,3 +26,44 @@
 - 错误处理
 - await 命令后面的 Promise 对象，运行结果可能是 rejected，所以最好把 await 命令放在 try...catch... 代码块中
 - try..catch...错误处理也比较符合我们平常编写同步代码时候处理的逻辑
+
+```js
+// promise 异常捕获场景
+// 1. 过程有错 及时捕获 但是不影响后续异步业务
+p1
+.then((res)=>{
+  // ss
+  return p2
+}, (err)=>{
+  console.log(err)
+})
+.then((res)=>{
+  // ss
+  return p3
+}, (err)=>{
+  console.log(err)
+})
+.then((res)=>{
+  // ss
+  return p4
+}, (err)=>{
+  console.log(err)
+})
+// 2. 期间一步有错及时终止后续异步业务
+p1
+.then((res)=>{
+  // ss
+  return p2
+})
+.then((res)=>{
+  // ss
+  return p3
+})
+.then((res)=>{
+  // ss
+  return p4
+})
+.cach((err)=>{
+  console.log(err)
+})
+```

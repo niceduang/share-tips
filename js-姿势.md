@@ -297,3 +297,11 @@ const cut = function () {
 }
 video.addEventListener('loadeddata', cut) // 在视频帧数已加载时执行截取
 ```
+
+#### Dom处理
+```js
+let data = [{name:'wang',age:23},{name:'wang',age:23},{name:'wang',age:23}]
+let _html = data.map(item => {
+  return `<li>${item.name}-${item.age}</li>`
+}).join('')
+```
