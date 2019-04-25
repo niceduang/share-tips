@@ -2,7 +2,7 @@ const url = require('url')
 const express = require('express')
 const config = require('./config')
 const app = express()
-app.listen(config.port, (err) => {
+app.listen(config.port, err => {
   if (err) {
     throw new Error(err)
   }

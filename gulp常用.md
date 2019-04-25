@@ -1,7 +1,7 @@
 ### gulp 常用插件
 
 | 插件名 | 作用 |
-|---|---|
+|:---|:---|
 | [gulp-sass](https://www.npmjs.com/package/gulp-sass) | 编译sass成css文件 |
 | [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) | 压缩 png/jpg/git/svg 格式图片文件 |
 | [gulp-base64](https://www.npmjs.com/package/gulp-base64) | 小图标转码为内联 base64 |

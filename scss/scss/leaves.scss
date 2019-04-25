@@ -1,85 +1,142 @@
 @charset "utf-8";
 
-html,body,p,div{margin: 0; padding: 0;}
+html,
+body,
+p,
+div {
+  margin: 0;
+  padding: 0;
+}
 
-$img-base-path: '../images/';
+$img-base-path: "../images/";
 
-%adad{ width: 100%; }
+%adad {
+  width: 100%;
+}
 
-.ppp { @extend %adad; }
+.ppp {
+  @extend %adad;
+}
 
-.err{ color: #fff; }
+.err {
+  color: #fff;
+}
 
 .err-pop {
-	@extend .err;
-	background: #fff;
+  @extend .err;
+  background: #fff;
 }
 
 @function randomFloat($min, $max) {
-	@return $min + random() * ($max - $min);
+  @return $min + random() * ($max - $min);
 }
 
 .drop-leaves {
+  position: relative;
 
-	position: relative;
+  span {
+    position: absolute;
+    top: -50px;
+    animation-name: ani-leaf-fade, ani-leaf-drop;
+    animation-timing-function: linear, ease-in;
+    animation-iteration-count: infinite, infinite;
+  }
+  i {
+    display: block;
+    background: url(#{$img-base-path}p1_a_leafs.png) no-repeat;
+    transform-origin: 50% -100%;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  %i1 {
+    width: 30px;
+    height: 30px;
+    background-position: 0 -184px;
+  }
+  %i2 {
+    width: 40px;
+    height: 40px;
+    background-position: -234px 0;
+  }
+  %i3 {
+    width: 30px;
+    height: 30px;
+    background-position: -244px -146px;
+  }
 
-	span { position: absolute; top: -50px; animation-name: ani-leaf-fade, ani-leaf-drop; animation-timing-function: linear, ease-in; animation-iteration-count: infinite, infinite; }
-	i { display: block; background: url(#{$img-base-path}p1_a_leafs.png) no-repeat; transform-origin: 50% -100%; animation-timing-function: ease-in-out;animation-iteration-count: infinite; animation-direction: alternate; }
-	%i1{ width: 30px; height: 30px; background-position: 0 -184px;}
-	%i2{ width: 40px; height: 40px; background-position: -234px 0;}
-	%i3{ width: 30px; height: 30px; background-position: -244px -146px; }
+  %a1 {
+    animation-name: ani-leaf-spin-clockwise;
+  }
+  %a2 {
+    animation-name: ani-leaf-spin-counterclockwise;
+  }
 
-	%a1{ animation-name: ani-leaf-spin-clockwise; }
-	%a2{ animation-name: ani-leaf-spin-counterclockwise; }
+  @for $i from 1 through 20 {
+    $ran: random();
+    $ran2: random();
+    span:nth-child(#{$i}) {
+      left: random() * 100%;
+      $ad: randomFloat(6s, 12s);
+      $ade: randomFloat(0s, 8s);
+      animation-duration: $ad, $ad;
+      animation-delay: -$ade, -$ade;
 
-	@for $i from 1 through 20 {
-		$ran: random();
-		$ran2: random();
-		span:nth-child(#{$i}) {
-			left: random() * 100%;
-			$ad: randomFloat(6s, 12s);
-			$ade: randomFloat(0s, 8s);
-			animation-duration: $ad, $ad;
-			animation-delay: -$ade, -$ade;
+      i {
+        @if $ran2 > 0.5 {
+          @extend %a1;
+        } @else {
+          @extend %a2;
+        }
 
-			i {
-				@if $ran2 > 0.5 {
-					@extend %a1;
-				} @else {
-					@extend %a2;
-				}
-				
-				animation-duration: random() * 4s + 2s;
-				@if $ran > 0.6 {
-					@extend %i1;
-				} @else if $ran > 0.3 {
-					@extend %i2;
-				} @else {
-					@extend %i3;
-				}
-			}
-		}
-	}
+        animation-duration: random() * 4s + 2s;
+        @if $ran > 0.6 {
+          @extend %i1;
+        } @else if $ran > 0.3 {
+          @extend %i2;
+        } @else {
+          @extend %i3;
+        }
+      }
+    }
+  }
 
-	@at-root {
-		@keyframes ani-leaf-fade {
-			0%{ opacity: 1; }
-			90%{ opacity: 1; }
-			100%{ opacity: 0; }
-		}
-		@keyframes ani-leaf-drop {
-			0%{ transform: translate(0, 0); }
-			100%{ transform: translate(0, 600px); }
-		}
+  @at-root {
+    @keyframes ani-leaf-fade {
+      0% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    @keyframes ani-leaf-drop {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(0, 600px);
+      }
+    }
 
-		@keyframes ani-leaf-spin-clockwise {
-			0% { transform: rotate(-100deg); }
-			100% { transform: rotate(100deg); }
-		}
-		@keyframes ani-leaf-spin-counterclockwise {
-			0% { transform: scale(-1, 1) rotate(100deg); }
-			100%{ transform: scale(-1, 1) rotate(-100deg); }
-		}
-	}
-	
+    @keyframes ani-leaf-spin-clockwise {
+      0% {
+        transform: rotate(-100deg);
+      }
+      100% {
+        transform: rotate(100deg);
+      }
+    }
+    @keyframes ani-leaf-spin-counterclockwise {
+      0% {
+        transform: scale(-1, 1) rotate(100deg);
+      }
+      100% {
+        transform: scale(-1, 1) rotate(-100deg);
+      }
+    }
+  }
 }

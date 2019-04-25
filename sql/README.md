@@ -1,6 +1,9 @@
 ## 数据库
+
 ### MySQL
+
 - 增删改查
+
 ```bash
 # 增
 INSERT INTO 表 (字段列表) VALUS(值);
@@ -18,6 +21,7 @@ SELECT username,lock FROM `user_table` WHERE ID=1;
 ```
 
 - [安装](http://www.runoob.com/mysql/mysql-install.html)
+
 ```bash
 # 输出如下
 2018-12-11T07:10:38.957819Z 0 [System] [MY-013169] [Server] G:\web\mysql-8.0.13-winx64\bin\mysqld.exe (mysqld 8.0.13) initializing of server in progress as process 6272

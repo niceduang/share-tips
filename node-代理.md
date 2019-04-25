@@ -1,4 +1,5 @@
-# 借助node前端代理转发接口
+# 借助 node 前端代理转发接口
+
 ```js
 // server.js
 var path = require('path')
@@ -43,9 +44,15 @@ app.use(express.static(path.join(__dirname, 'www')))
 // 设置代理
 
 app.middleware = [
-  proxy(['/v2'], {target: 'https://api.douban.com', changeOrigin: true}),
-  proxy(['/getPlayerGloryRank'], {target: 'https://api.tgatv.qq.com/app/match', changeOrigin: true}),
-  proxy(['/api'], {target: 'https://www.tuling123.com/openapi/', changeOrigin: true})
+  proxy(['/v2'], { target: 'https://api.douban.com', changeOrigin: true }),
+  proxy(['/getPlayerGloryRank'], {
+    target: 'https://api.tgatv.qq.com/app/match',
+    changeOrigin: true
+  }),
+  proxy(['/api'], {
+    target: 'https://www.tuling123.com/openapi/',
+    changeOrigin: true
+  })
 ]
 
 app.use(app.middleware)
@@ -53,8 +60,8 @@ app.use(app.middleware)
 app.listen(3000, () => {
   console.log('http://localhost:3000')
 })
-
 ```
+
 ```js
 // GET
 $.ajax({
@@ -65,12 +72,12 @@ $.ajax({
     q: '张杰'
   }
 })
-.done((res) => {
-  console.log({ res })
-})
-.fail((err) => {
-  console.log(err)
-})
+  .done(res => {
+    console.log({ res })
+  })
+  .fail(err => {
+    console.log(err)
+  })
 
 // POST
 $.ajax({
@@ -83,18 +90,20 @@ $.ajax({
     userId: 1
   }
 })
-.done((res) => {
-  console.log({ res })
-})
-.fail((err) => {
-  console.log(err)
-})
+  .done(res => {
+    console.log({ res })
+  })
+  .fail(err => {
+    console.log(err)
+  })
 ```
 
 # node 搭建代理处理跨域
 
-## 前端ajax场景
-- 前端ajax
+## 前端 ajax 场景
+
+- 前端 ajax
+
 ```js
 $.ajax({
   url: 'http://api.tgatv.qq.com/app/match/getPlayerGloryRank',
@@ -105,13 +114,12 @@ $.ajax({
     seasonid: 'KPL2018S1'
   }
 })
-.done(function (res) {
-  console.log({ res })
-})
-.fail(function () {
-  console.log("error")
-})
-
+  .done(function(res) {
+    console.log({ res })
+  })
+  .fail(function() {
+    console.log('error')
+  })
 
 // 代理
 $.ajax({
@@ -123,15 +131,16 @@ $.ajax({
     seasonid: 'KPL2018S1'
   }
 })
-.done((res) => {
-  console.log({ res })
-})
-.fail(() => {
-  console.log("error")
-})
-
+  .done(res => {
+    console.log({ res })
+  })
+  .fail(() => {
+    console.log('error')
+  })
 ```
-- node配置
+
+- node 配置
+
 ```js
 const path = require('path')
 const express = require('express')
@@ -144,7 +153,10 @@ app.use(express.static(path.join(__dirname, 'www')))
 // 设置Node.js跨域请求
 app.use('*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Content-Length, Authorization, Accept, X-Requested-With'
+  )
   res.header('Access-Content-Allow-Methods', 'POST, GET')
   next()
 })
@@ -166,16 +178,19 @@ app.get('/getPlayerGloryRank', (req, res) => {
     qs
   }
   request(ops, (err, response, body) => {
-    if (err) { throw new Error(err) }
+    if (err) {
+      throw new Error(err)
+    }
     // console.log('statusCode:', response && response.statusCode) // Print the response status code if a response was received
     res.send(body)
   })
 })
 
 // 启动监听
-app.listen(3000, (err) => {
-  if (err) { throw new Error(err) }
+app.listen(3000, err => {
+  if (err) {
+    throw new Error(err)
+  }
   console.log('listen 3000...')
 })
-
 ```
